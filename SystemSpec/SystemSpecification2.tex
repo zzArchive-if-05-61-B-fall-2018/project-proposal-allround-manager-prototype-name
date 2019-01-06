@@ -9,10 +9,16 @@
 \usepackage[usenames,dvipsnames]{color}
 \usepackage[table]{xcolor}
 \usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{caption}
+\usepackage{floatrow}%
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \theoremstyle{definition}
 \newtheorem{example}{Example}
+
 
 \newcommand{\projectname}{Allround Manager}
 \newcommand{\productname}{Allround Manager}
@@ -349,29 +355,112 @@ Input field & Valid inputs \\ \hline
 
 \section{Non-functional Requirements}
 
+\begin{flushleft}
+  \begin{tabular}{|l|l|}
+  \hline
+  ID & NFR001\\ \hline
+  Name & Data volume \\ \hline
+  Type &  EFFIC\\ \hline
+  Description & The data usage should be under 75 mb per month \\
+  & given that not a lot of pictures are up/downloaded. \\
+  & Assuming 8 Mbit/s download 2 Mbit/s upload. \\ \hline
+  \end{tabular}
+\end{flushleft}
+
+\vspace*{1 cm}
+
+\begin{flushleft}
+  \begin{tabular}{|l|l|}
+  \hline
+  ID &  NFR002\\ \hline
+  Name & Start time \\ \hline
+  Type &  EFFIC\\ \hline
+  Description & The synchronisation of the user configuration and \\
+  & the database should not take longer than 5 seconds. \\ 
+  & Assuming 8 Mbit/s download 2 Mbit/s upload. \\ \hline
+  \end{tabular}
+\end{flushleft}
+
+\vspace*{1 cm}
+
+\begin{flushleft}
+  \begin{tabular}{|l|l|}
+  \hline
+  ID &  NFR003\\ \hline
+  Name & Group \\ \hline
+  Type &  EFFIC\\ \hline
+  Description & Changes to the group should not take \\
+  & longer than 1 second to upload. \\ 
+  & Assuming 8 Mbit/s download 2 Mbit/s upload. \\ \hline
+  \end{tabular}
+\end{flushleft}
+
+\vspace*{1 cm}
+
+\begin{flushleft}
+  \begin{tabular}{|l|l|}
+  \hline
+  ID &  NFR003\\ \hline
+  Name & Accessibility \\ \hline
+  Type &  SEC \\ \hline
+  Description & The only data we need to protect from \\
+  & unauthorized access are the users password and e-mail address. \\ \hline
+  \end{tabular}
+\end{flushleft}
+
+
 \pagebreak
 
 \section{Quantity Structure}
+Every user has a nickname, password and e-mail. All configuration from every user concerning hometown, address and age will be saved independetly for every event. An event has its
+own information about the date, when the event takes place, the number of participants, which participants are included. Those informations can be also seen by every member. A new user with the default configuration will use about 90 records. Considering the amount of data we chose to save the user data in a database. 
 
 \pagebreak
+
+
 
 \section{System Architecture and Interfaces}
+\includegraphics[scale=.2]{register.jpeg}
+\includegraphics[scale=.2]{register.jpeg} 
 
 \pagebreak
+
+\includegraphics[scale=.2]{toolbar.jpeg} 
+\includegraphics[scale=.2]{create_event.jpeg} \\
+\includegraphics[scale=.2]{group.jpeg}
+
+\pagebreak
+
 
 \section{Acceptance Criteria}
 
-\pagebreak
+\subsection{AC001}
 
-\section{Acceptance Criteria}
+\begin{tabular}{|l|l|}
+\hline 
+\cellcolor[gray]{0.5}\textcolor{white}{Test step} & \cellcolor[gray]{0.5}\textcolor{white}{Expected behaviour} \\ \hline
+Launch an event without declaring & Event wont be created and the user \\ the information which is needed & will be ask to put it in \\ \hline
+Inviting the same user twice & Will throw an error which says \\ for the same event & that he cant do that \\ \hline
+Inviting an user for an event & Will send him the invitation and notify \\  & the event leader\\ \hline
+Change an information of an event & Will notify all participants about \\ & the change \\ \hline
+\end{tabular} 
 
-\pagebreak
+\subsection{AC002}
 
-\section{References}
+\begin{tabular}{|l|l|}
+\hline 
+\cellcolor[gray]{0.5}\textcolor{white}{Test step} & \cellcolor[gray]{0.5}\textcolor{white}{Expected behaviour} \\ \hline
+Creating an account with & Sending and error message which tells the \\ missing information & user to fill up the missing information \\ \hline
+Joining an event as participat & Getting all the information about the event \\ \hline
+Leaving an event as participat & Notyfying the event leader \\ \hline
+Removing an participant as & Changing the information \\ event leader & about event \\ \hline
+Removing an participant, which & Throwing a error message, which tells the \\ doesn't exist & event leader, that this doesn't exist \\ \hline
 
-\pagebreak
 
-\section{List of Figures}
+
+\end{tabular}
+
+
 
 \pagebreak
 
