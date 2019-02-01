@@ -1,0 +1,7 @@
+{
+  "name": "IAMAPP",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
