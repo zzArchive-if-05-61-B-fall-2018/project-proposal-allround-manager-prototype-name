@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  {{authService.getSpecialData().user.id}}
+  <br>
+  {{authService.getSpecialData().user.name}}
+  <br>
+  {{authService.getSpecialData().user.email}}
+</ion-content>
