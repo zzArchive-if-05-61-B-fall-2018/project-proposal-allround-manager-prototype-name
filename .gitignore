@@ -287,5 +287,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
+#Ionic
+node_module/
 # End of https://www.gitignore.io/api/latex,linux,macos,windows
