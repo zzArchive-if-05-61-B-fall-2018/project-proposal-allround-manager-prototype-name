@@ -10,4 +10,7 @@ export class HomePage {
 
   constructor(public authService: AuthenticationService) {}
 
+  logout() {
+    this.authService.logout();
+  }
 }

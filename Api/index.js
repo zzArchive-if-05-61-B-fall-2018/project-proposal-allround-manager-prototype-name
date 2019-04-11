@@ -1,5 +1,6 @@
 "use strict";
 const  express  =  require('express');
+
 const  bodyParser  =  require('body-parser');
 const cors = require('cors')
 const  sqlite3  =  require('sqlite3').verbose();
@@ -10,7 +11,7 @@ const SECRET_KEY = "secretkey23456";
 
 const  app  =  express();
 const  router  =  express.Router();
-app.use(cors())
+app.use(cors());
 
 router.use(bodyParser.urlencoded({ extended:  false }));
 router.use(bodyParser.json());
