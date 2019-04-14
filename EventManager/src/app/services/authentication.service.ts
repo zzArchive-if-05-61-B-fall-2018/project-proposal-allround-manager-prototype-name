@@ -5,34 +5,37 @@ import { Storage} from '@ionic/storage';
 import {User} from '../interfaces/user';
 import {HttpClient} from '@angular/common/http';
 import {AuthGuard} from '../interfaces/auth-guard';
-import {tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {Token} from '@angular/compiler';
 
-const TOKEN_KEY = 'ACCESS_TOKEN';
+const TOKEN_KEY = 'access_token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  AUTH_SERVER_ADDRESS  =  'http://localhost:3000';
+  AUTH_SERVER_ADDRESS  =  environment.url;
   authenticationState = new BehaviorSubject(false);
-  user: AuthGuard;
+  user = null;
+  tok = null;
 
-  constructor(private storage: Storage, private plt: Platform, private httpClient: HttpClient) {
+  constructor(private storage: Storage, private plt: Platform, private httpClient: HttpClient, private helper: JwtHelperService) {
     this.plt.ready().then(() => {
       this.checkToken();
   });
   }
 
-  login(user: User): Observable<AuthGuard> {
-    return this.httpClient.post( `${this.AUTH_SERVER_ADDRESS}/login`, user).pipe(
-        tap( async (res: AuthGuard) => {
-           if (res.user) {
-            await this.storage.set('ACCESS_TOKEN', res.user.access_token);
-            await  this.storage.set('EXPIRES_IN', res.user.expires_in);
-            this.user = res;
-            this.authenticationState.next(true);
-          }
+  login(user) {
+    return this.httpClient.post( `${this.AUTH_SERVER_ADDRESS}/api/auth/login`, user).pipe(
+        tap( res => {
+               this.storage.set(TOKEN_KEY, res['token']);
+               console.log(res['user']);
+               this.user = {id: res['user']._id, email: res['user'].email};
+               this.tok = this.helper.decodeToken(res['token']);
+               this.authenticationState.next(true);
         })
     );
     /*return this.storage.set(TOKEN_KEY, 'Bearer 123456').then(res => {
@@ -40,22 +43,18 @@ export class AuthenticationService {
     });*/
   }
 
-  register(user: User): Observable<AuthGuard> {
-    return this.httpClient.post<AuthGuard>(`${this.AUTH_SERVER_ADDRESS}/register`, user).pipe(
-        tap(async (res: AuthGuard ) => {
-          if (res.user) {
-            await this.storage.set('ACCESS_TOKEN', res.user.access_token);
-            await this.storage.set('EXPIRES_IN', res.user.expires_in);
-            this.user = res;
-            this.authenticationState.next(true);
-          }
+  register(user) {
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/api/auth/register`, user).pipe(
+        tap(res => {
+            this.user = res['user'];
+          this.authenticationState.next(true);
         })
     );
   }
   async logout() {
-    await this.storage.remove('ACCESS_TOKEN');
-    await this.storage.remove('EXPIRES_IN');
-    this.authenticationState.next(false);
+      this.storage.remove(TOKEN_KEY).then(() => {
+          this.authenticationState.next(false);
+      });
   }
   getSpecialData() {
         return this.user;
@@ -66,7 +65,15 @@ export class AuthenticationService {
   checkToken() {
     return this.storage.get(TOKEN_KEY).then(res => {
       if (res) {
-        this.authenticationState.next(true);
+        const decoded = this.helper.decodeToken(res);
+        const isExpired = this.helper.isTokenExpired(res);
+        if (!isExpired) {
+            this.tok = decoded;
+            this.authenticationState.next(true);
+            this.user = decoded;
+        } else{
+            this.storage.remove(TOKEN_KEY);
+        }
       }
     });
   }

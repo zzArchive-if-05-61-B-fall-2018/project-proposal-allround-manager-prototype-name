@@ -5,8 +5,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {Router} from '@angular/router';
-import {User} from "./interfaces/user";
-import {AuthGuard} from "./interfaces/auth-guard";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +12,6 @@ import {AuthGuard} from "./interfaces/auth-guard";
 })
 export class AppComponent {
 
-  user: AuthGuard;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

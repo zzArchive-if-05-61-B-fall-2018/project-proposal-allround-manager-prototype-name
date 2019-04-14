@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
 import {User} from '../../interfaces/user';
 import {EventHandlerService} from '../../services/event-handler.service';
+import {EventsPage} from '../events/events.page';
 
 @Component({
   selector: 'app-groups',
@@ -16,8 +17,6 @@ export class GroupsPage {
   }
 
   createEvent(event) {
-    this.eventHandler.createEvent(event).subscribe((res) => {
-      console.log('Event Created');
-    });
+    this.eventHandler.createEvent(event.value);
   }
 }

@@ -7,9 +7,8 @@
 </ion-header>
 
 <ion-content padding>
-  {{authService.getSpecialData().user.id}}
+  <button (click)="logout()">Logout</button>
+  {{authService.user.id}}
   <br>
-  {{authService.getSpecialData().user.name}}
-  <br>
-  {{authService.getSpecialData().user.email}}
+  {{authService.user.email}}
 </ion-content>
