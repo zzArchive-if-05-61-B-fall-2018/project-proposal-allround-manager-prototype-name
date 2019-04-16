@@ -3,8 +3,8 @@
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-A step by step series of explanation that tell you how to get the app running.
+These instructions will give you a copy of the project and running on your local machine for development and testing purposes.
+A step by step series of explanation that tells you how to make the app run.
 
 ### Install npm
 To run our app you first of all have to install NPM.
@@ -21,7 +21,7 @@ There are great installation tutorials on Youtube
 After installing Npm, navigate with the terminal to the location where you stored our App.
 ### Starting the Back-end Api
 Open a new terminal and navigate to the cd /RestFull directory.
-Install the dependencies start the server. Make sure if you don not use the port 7000. If yes change it at server.js to a valid port. [1000-10000].
+Install the dependencies - start the server. Make sure wether you use the port 7000 or not. If yes, then change it in server.js to a valid port. [1000-10000].
 ```sh
 $ cd RestFull
 $ npm i
@@ -37,4 +37,4 @@ $ npm i -g ionic
 $ npm i
 $ ionic serve
 ```
-After typing the command ionic serve a browser pop up should come. Now you can create a user and explore our app. 
+After typing the command "ionic serve" a browser pop up should be displayed. Now you can create a user and explore our app. 
