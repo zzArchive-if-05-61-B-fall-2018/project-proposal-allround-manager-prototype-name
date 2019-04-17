@@ -10,6 +10,15 @@ A step by step series of explanation that tells you how to make the app run.
 To run our app you first of all have to install NPM.
 
 There are great installation tutorials on Youtube
+| Plugin | README |
+| ------ | ------ |
+| Dropbox | [plugins/dropbox/README.md][PlDb] |
+| Github | [plugins/github/README.md][PlGh] |
+| Google Drive | [plugins/googledrive/README.md][PlGd] |
+| OneDrive | [plugins/onedrive/README.md][PlOd] |
+| Medium | [plugins/medium/README.md][PlMe] |
+| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
+
 | OS | Link |
 | ------ | ------ |
 | Windows | https://www.youtube.com/watch?v=gHuIKptS0Qg |
