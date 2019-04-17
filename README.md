@@ -23,6 +23,7 @@ There are great installation tutorials on Youtube.
 
 | Link |
 | ---- |
+| https://www.youtube.com/watch?v=FwMwO8pXfq0&t=312s |
 
 ### Walktrough
 
