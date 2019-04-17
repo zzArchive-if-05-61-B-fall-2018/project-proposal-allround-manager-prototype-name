@@ -17,6 +17,13 @@ There are great installation tutorials on Youtube
 | Mac | https://www.youtube.com/watch?v=rF1ZHmqvm8I |
 | Linux | https://www.youtube.com/watch?v=K6QiSKy2zoM
 
+### Install MongoDb
+Because our back-end is not running on a seperate server you have to download mongodb too.
+There are great installation tutorials on Youtube.
+
+| Link |
+| ---- |
+
 ### Walktrough
 
 After installing Npm, navigate with the terminal to the location where you stored our App.
