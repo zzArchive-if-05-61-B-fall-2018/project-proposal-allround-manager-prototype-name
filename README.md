@@ -10,7 +10,6 @@ A step by step series of explanation that tells you how to make the app run.
 To run our app you first of all have to install NPM.
 
 There are great installation tutorials on Youtube
-|
 
 | OS | Link |
 | ------ | ------ |
