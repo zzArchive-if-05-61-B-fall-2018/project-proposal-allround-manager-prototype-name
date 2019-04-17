@@ -17,7 +17,7 @@ There are great installation tutorials on Youtube
 | Mac | https://www.youtube.com/watch?v=rF1ZHmqvm8I |
 | Linux | https://www.youtube.com/watch?v=K6QiSKy2zoM
 
-### Install MongoDb
+### Install MongoDB
 Because our back-end is not running on a seperate server you have to download mongodb too.
 There are great installation tutorials on Youtube.
 
@@ -27,23 +27,23 @@ There are great installation tutorials on Youtube.
 
 ### Walktrough
 
-After installing Npm, navigate with the terminal to the location where you stored our App.
-### Starting the Back-end Api
-Open a new terminal and navigate to the cd /RestFull directory.
-Install the dependencies - start the server. Make sure wether you use the port 7000 or not. If yes, then change it in server.js to a valid port. [1000-10000].
+After installing Npm and MongoDB, open tow terminals. One to run the back-end and one to run the front-end. After doing this navigate with the terminals to the location where you stored our repository.
+### Starting the back-end
+Now navigate with the terminal for the back-end to the cd /RestFull directory.
+Install the dependencies - start the server. Make sure wether you use the port 7000 or not. If yes, then change it in server.js to a valid port. Don not forget, if you change the port in the file make sure you also change it at the front-end application.
 ```sh
 $ cd RestFull
 $ npm i
+$ npm i nodemon
 $ npm start
 ```
 
 ### Starting the front-end
-
-Now open a new terminal and navigate to the /EventManager directory and install Ionic. The -g means it is a global install. For Window’s it's recommended to open an Admin command prompt. For Mac/Linux, run the command with sudo.
+Navigate with the front-end terminal to the /EventManager directory and install Ionic. The -g means it is a global install. For Window’s it's recommended to open an Admin command prompt. For Mac/Linux, run the command with sudo.
 ```sh
 $ cd ../EventManager
 $ npm i -g ionic
 $ npm i
 $ ionic serve
 ```
-After typing the command "ionic serve" a browser pop up should be displayed. Now you can create a user and explore our app. 
+After typing the command "ionic serve" a browser pop up should be displayed. Now you can create a user and explore our app.
