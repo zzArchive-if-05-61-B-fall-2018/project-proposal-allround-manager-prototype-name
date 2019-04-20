@@ -1,0 +1,15 @@
+ion-fab-button[data-desc] {
+  position: relative;
+}
+
+ion-fab-button[data-desc]::after {
+  position: absolute;
+  content: attr(data-desc);
+  z-index: 1;
+  left: 50px;
+  bottom: 4px;
+  background-color: #d7d8da;
+  padding: 5px;
+  color: white;
+
+}
