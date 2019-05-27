@@ -1,0 +1,42 @@
+ion-content{
+    --padding-top: 25%;
+    --background: url('../../../theme/img/background_login.jpg');
+    .login-title{
+        padding-bottom: 50px;
+        h3{
+           font-family: Poppins-Bold; 
+           font-size: 30px;
+           color: #333333;
+        }
+    }
+    ion-card{
+        --background: rgba(254, 254, 254,0.99);     
+        border-radius: 14px;
+    }
+    ion-button{
+        --background: linear-gradient(to right, rgb(146, 226, 254), rgb(115, 1, 254));
+        --border-radius: 25px;
+        font-family: Popping-Bold;
+        font-weight: bold;
+    }
+    .p-t-115{
+        padding-top: 115px; 
+        padding-left: 15%;    
+    }
+    .text-center{
+        text-align: center !important;
+    }
+    .txt1{
+        font-family: Poppins-Regular;
+        font-size: 17px;
+        color: #666666;
+        line-height: 1.5;
+    }
+    .txt2{
+        font-family: Poppins-Regular;
+        font-size: 17px;
+        color: #333333;
+        line-height: 1.5;
+        text-decoration: none;
+    }
+}

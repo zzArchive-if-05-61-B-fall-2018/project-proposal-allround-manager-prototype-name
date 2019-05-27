@@ -21,7 +21,4 @@ export class CreatePage implements OnInit {
     this.eventHandler.createEvent(event.value);
     this.navController.pop();
   }
-  leave() {
-    this.navController.pop();
-  }
 }
