@@ -28,6 +28,7 @@ export class LoginPage implements OnInit {
     },
     error => {
       this.loading.dismiss();
+      console.log(error);
     });
   }
 
@@ -40,6 +41,7 @@ export class LoginPage implements OnInit {
   }
 
   private showError(text: string) {
+    console.log(text);
     this.loading.dismiss();
   }
 }

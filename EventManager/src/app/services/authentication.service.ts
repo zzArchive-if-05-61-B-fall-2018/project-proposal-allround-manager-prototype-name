@@ -37,7 +37,7 @@ export class AuthenticationService {
                this.tok = this.helper.decodeToken(res['token']);
                this.authenticationState.next(true);
         },
-        error => console.log('error'))
+        error => error)
     );
     /*return this.storage.set(TOKEN_KEY, 'Bearer 123456').then(res => {
       this.authenticationState.next(true);
