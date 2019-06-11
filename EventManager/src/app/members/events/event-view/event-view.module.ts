@@ -5,24 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EventsPage } from './events.page';
-import {CreatePage} from './create/create.page';
-
+import { EventViewPage } from './event-view.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EventsPage
-  },
-  {
-    path: 'create',
-    loadChildren: './create/create.module#CreatePageModule'
-  },
-  {
-    path: ':eventId',
-    loadChildren: './event-view/event-view.module#EventViewPageModule'
+    component: EventViewPage
   }
-
 ];
 
 @NgModule({
@@ -32,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [EventsPage]
+  declarations: [EventViewPage]
 })
-export class EventsPageModule {}
+export class EventViewPageModule {}

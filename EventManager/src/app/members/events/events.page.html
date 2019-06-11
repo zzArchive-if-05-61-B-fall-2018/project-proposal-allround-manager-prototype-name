@@ -7,7 +7,7 @@
 <ion-content padding>
 
   <div>
-    <ion-card *ngFor="let event of (results)">
+    <ion-card *ngFor="let event of results" [routerLink]="['/members/tabs/tabs/events',event.eventName]">
       <ion-grid style="padding: 0px;">
         <ion-row style="height: 30px;">
           <ion-col size="2" style="border-right: 2px solid #727272;">
@@ -24,6 +24,7 @@
         </ion-row>
       </ion-grid>
     </ion-card>
+
   </div>
 
   <ion-fab vertical="bottom" horizontal="start">
@@ -32,7 +33,7 @@
     </ion-fab-button>
 
     <ion-fab-list side="top">
-      <ion-fab-button color="success" data-desc="Join an Event">
+      <ion-fab-button [routerLink]="['/event-view']" color="success" data-desc="Join an Event">
         <ion-icon name="person-add"></ion-icon>
       </ion-fab-button>
       <ion-fab-button  (click)="createEvent()" color="medium" data-desc="Create an Event">

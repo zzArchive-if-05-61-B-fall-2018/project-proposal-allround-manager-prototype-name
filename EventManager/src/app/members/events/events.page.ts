@@ -12,24 +12,17 @@ import {EventsPageModule} from './events.module';
 })
 
 export class EventsPage implements OnInit {
-  results: Observable<Object>;
+  results: Object[];
 
   constructor(private handler: EventHandlerService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getEventsFromApi();
-  }
-
-  getEventsFromApi() {
-    this.handler.getEvents().subscribe( res => {
-       this.results = res['events'];
-       console.log(this.results);
+    this.handler.getEvents().subscribe(res => {
+      this.results = res['events'];
     });
   }
+
   createEvent() {
     this.router.navigate(['members', 'tabs' , 'tabs', 'events', 'create']);
-  }
-  update() {
-    this.getEventsFromApi();
   }
 }

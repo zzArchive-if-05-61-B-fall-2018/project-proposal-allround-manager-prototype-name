@@ -10,6 +10,7 @@ import {AuthenticationService} from './authentication.service';
 })
 export class EventHandlerService {
 
+  events: Event[];
   constructor(private http: HttpClient, private apiService: AuthenticationService) { }
 
   createEvent(event) {
