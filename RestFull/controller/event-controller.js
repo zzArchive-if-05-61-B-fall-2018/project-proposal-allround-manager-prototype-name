@@ -1,29 +1,93 @@
 const User = require('../models/user');
-
+const Event = require('../models/event');
+const UserjoinEvent = require('../models/userjoinevent');
 exports.getEventsById = (req,res) => {
-    console.log(req.body);
     getEventsById(req.body.id)
-        .then(user => res.send(user));
+        .then(events => {
+            if(events.length === 0){
+                res.status(400).json({'msg': "Can not find any Events!"});
+            }
+            res.status(200).json(events);
+        });
 }
 
 exports.createEventById = (req,res) =>{
-    createEvent(req.body)
+    /*createEvent(req.body)
         .then(us => res.status(200).send(us))
-        .catch(err => res.status(400).send(err.message));
+        .catch(err => res.status(400).send(err.message));*/
+    const newEvent = Event(req.body); 
+    newEvent.save((err,user) => {
+        if(err){
+            return res.status(400).json({'msg': err.message});
+        }
+        return res.status(201).json(user);
+    })   
+}
+
+exports.userJoin = (req,res) =>{
+     User.findById(req.body.userId, (err,user) => {
+        if(err){
+            return res.status(400).json({'msg':'User does not exist'})
+        }
+        Event.findById(req.body.eventId,(err,event)=>{
+            if(err){
+                return res.status(400).json({'msg':'Event does not exist!'});
+            }
+            const newJoin = UserjoinEvent(req.body);
+            newJoin.save((err,join) =>{
+                if(err) res.status(400).json({'msg':err.message});
+                return res.status(200).json();
+            });
+        });
+     });
+}
+
+exports.getJoinedUser = (req,res) =>{
+    console.log("ss");
+    getJoinedUser(req.body.eventId)
+        .then(users => {
+            res.status(200).json(users);
+        })
+        .catch(err => res.status(400).json({'msg':err.message}));
 }
 async function getEventsById(id){
-    const us = await User
-        .findById(id)
-        .select({events: 1});
-    console.log(us);
+    const us = await Event
+        .find({adminId: id});
     return us;
 }
 
-async function createEvent(eventBody){
-    const user = await User.findByIdAndUpdate(eventBody.id,{
+exports.notificate = (req,res) =>{
+    createNotification(req.body)
+    .then(notificates => {
+        res.status(200).json(notificates);
+    })
+}
+
+exports.getNotifactions = (req,res) => {
+    getNotifactionsFromUser(req.body.userId)
+        .then(notifications => {
+            res.status(200).json(notifications);
+        })
+}
+
+async function getNotifactionsFromUser(id){
+    const notifications = await User
+        .findById(id)
+        .select({notifications:1,_id: 0});
+    return notifications;
+}
+async function getJoinedUser(event_id){
+    const us = await UserjoinEvent
+        .find({eventId: event_id})
+        .select({userId: 1, _id: 0});
+    return us;
+}
+async function createNotification(body){
+    const notificates = await User.findByIdAndUpdate(body.userId,{
         $addToSet: {
-            events: {eventName: eventBody.name}
+            notifications: {eventId: body.eventId}
         }
-    },{new: true});
-    return user;
+    },{new: true})
+    .select({notifications: 1, _id: 0});
+    return notificates;
 }

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { EventHandlerService} from '../../services/event-handler.service';
 import { Event} from '../../interfaces/event';
 import {Router} from '@angular/router';
 import {EventsPageModule} from './events.module';
+import {UpdateEventsService} from '../../services/update-events.service';
 
 @Component({
   selector: 'app-events',
@@ -13,8 +14,14 @@ import {EventsPageModule} from './events.module';
 
 export class EventsPage implements OnInit {
   results: Object[];
-
-  constructor(private handler: EventHandlerService, private router: Router) {}
+  subscription: Subscription;
+  constructor(private handler: EventHandlerService, private router: Router, private updateService: UpdateEventsService) {
+    this.subscription = updateService.createAnnounced$.subscribe(
+        res => {
+          this.results = res['events'];
+        }
+    );
+  }
 
   ngOnInit(): void {
     this.handler.getEvents().subscribe(res => {

@@ -14,9 +14,7 @@ export class EventHandlerService {
   constructor(private http: HttpClient, private apiService: AuthenticationService) { }
 
   createEvent(event) {
-    return this.http.post(`${environment.url}/api/event/create`, {id: this.apiService.user.id, name: event.name}).subscribe((res) => {
-      console.log(res['events']);
-    });
+    return this.http.post(`${environment.url}/api/event/create`, {id: this.apiService.user.id, name: event.name});
   }
 
   getEvents() {
