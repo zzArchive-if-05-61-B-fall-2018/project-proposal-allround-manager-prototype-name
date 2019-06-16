@@ -1,9 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>{{eventName}}</ion-title>
+  <ion-toolbar text-center>
+    <ion-title>{{event?.event_name}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <p>It worked</p>
+  <ion-list>
+    <ion-button fill="outline" size="large" expand="full" color="medium">
+      Info
+    </ion-button>
+    <ion-button (click)="presentParticipentModal()" fill="outline" size="large" expand="full" color="medium">
+        Participents
+      </ion-button>
+    <ion-button fill="outline" size="large" expand="full" color="medium">
+      Invitation
+    </ion-button>
+    <ion-button fill="outline" size="large" expand="full" color="medium">
+      Event settings
+    </ion-button>
+  </ion-list>
 </ion-content>

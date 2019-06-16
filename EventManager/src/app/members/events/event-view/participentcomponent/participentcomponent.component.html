@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar text-center="">
+    <ion-title>Participants</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon name="md-arrow-back" size="large"(click)="myDismiss()">Back</ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let x of users">{{x.firstName}}</ion-item>
+  </ion-list>
+</ion-content>

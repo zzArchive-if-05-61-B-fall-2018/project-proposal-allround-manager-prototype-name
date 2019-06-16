@@ -21,6 +21,7 @@ export class CreatePage implements OnInit {
   }
   createEvent(event) {
     this.eventHandler.createEvent(event.value).subscribe(res => {
+      console.log(res);
       this.updateService.create(res);
       this.navController.pop();
     });

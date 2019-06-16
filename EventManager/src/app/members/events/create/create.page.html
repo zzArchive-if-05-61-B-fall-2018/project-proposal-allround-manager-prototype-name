@@ -9,22 +9,27 @@
 
 <ion-content padding>
   <form  #form="ngForm" (ngSubmit)="createEvent(form)">
-    <ion-grid>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div text-center>
-            <h3>Create an Event!</h3>
-          </div>
-          <div padding>
-            <ion-item>
-              <ion-input  name="name" type="text" placeholder="Name" ngModel required></ion-input>
-            </ion-item>
-          </div>
-          <div padding>
-            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Create</ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-list>
+      <ion-item>
+        <ion-input name="event_name" type="text" placeholder="Event Name" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" name="date" type="date" ngModel></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-textarea name="discription" type="text" placeholder="Discription" ngModel required></ion-textarea>
+      </ion-item>
+      <ion-list>
+        <ion-list-header><ion-label>MAX Participents</ion-label></ion-list-header>
+        <ion-item>
+          <ion-range name="maxparticipents" min="0" max="100" pin="" color="secondary" ngModel>
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">100</ion-label>
+          </ion-range>
+        </ion-item>
+      </ion-list>
+    </ion-list>
+    <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Create</ion-button>
   </form>
 </ion-content>

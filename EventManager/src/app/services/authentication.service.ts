@@ -32,8 +32,7 @@ export class AuthenticationService {
     return this.httpClient.post( `${this.AUTH_SERVER_ADDRESS}/api/auth/login`, user).pipe(
         tap( res => {
                this.storage.set(TOKEN_KEY, res['token']);
-               console.log(res);
-               this.user = {id: res['user']._id, email: res['user'].email};
+               this.user = res;
                this.tok = this.helper.decodeToken(res['token']);
                this.authenticationState.next(true);
         },
@@ -72,10 +71,15 @@ export class AuthenticationService {
             this.tok = decoded;
             this.authenticationState.next(true);
             this.user = decoded;
-        } else{
+            console.log(this.user);
+        } else {
             this.storage.remove(TOKEN_KEY);
         }
       }
     });
+  }
+
+  getUserPerId(id) {
+      return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/api/auth/user`, { id: id});
   }
 }

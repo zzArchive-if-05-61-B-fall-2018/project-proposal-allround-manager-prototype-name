@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EventViewPage } from './event-view.page';
-import {ParticipentcomponentComponent} from './participentcomponent/participentcomponent.component';
+import { JoinEventPage } from './join-event.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EventViewPage
+    component: JoinEventPage
   }
 ];
 
@@ -22,7 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [EventViewPage, ParticipentcomponentComponent],
-  entryComponents: [ParticipentcomponentComponent]
+  declarations: [JoinEventPage]
 })
-export class EventViewPageModule {}
+export class JoinEventPageModule {}

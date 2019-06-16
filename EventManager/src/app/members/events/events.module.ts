@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { EventsPage } from './events.page';
-import {CreatePage} from './create/create.page';
 
 
 const routes: Routes = [
@@ -19,10 +18,13 @@ const routes: Routes = [
     loadChildren: './create/create.module#CreatePageModule'
   },
   {
+    path: 'join',
+    loadChildren: './join-event/join-event.module#JoinEventPageModule'
+  },
+  {
     path: ':eventId',
     loadChildren: './event-view/event-view.module#EventViewPageModule'
   }
-
 ];
 
 @NgModule({

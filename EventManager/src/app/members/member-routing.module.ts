@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  { path: 'join-event', loadChildren: './events/join-event/join-event.module#JoinEventPageModule' },
 ];
 
 @NgModule({

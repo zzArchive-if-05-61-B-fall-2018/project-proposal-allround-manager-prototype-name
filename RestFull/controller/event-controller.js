@@ -10,17 +10,26 @@ exports.getEventsById = (req,res) => {
             res.status(200).json(events);
         });
 }
-
+exports.getEvent = (req,res) =>{
+    getEvent(req.body.id)
+        .then(event => {
+            console.log(event);
+            res.status(200).json(event)});
+}
 exports.createEventById = (req,res) =>{
     /*createEvent(req.body)
         .then(us => res.status(200).send(us))
         .catch(err => res.status(400).send(err.message));*/
+        console.log(req.body);
     const newEvent = Event(req.body); 
     newEvent.save((err,user) => {
         if(err){
             return res.status(400).json({'msg': err.message});
         }
-        return res.status(201).json(user);
+        const us = getEventsById(newEvent.adminId)
+        .then(events => {
+            return res.status(200).json(events);
+        });
     })   
 }
 
@@ -90,4 +99,8 @@ async function createNotification(body){
     },{new: true})
     .select({notifications: 1, _id: 0});
     return notificates;
+}
+async function getEvent(id){
+    const event = await Event.findById(id);
+    return event;
 }

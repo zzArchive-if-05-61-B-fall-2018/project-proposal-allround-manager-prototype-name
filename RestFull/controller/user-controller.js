@@ -8,13 +8,12 @@ function createToken(user) {
 }
 
 exports.registerUser = (req,res) => {
-    console.log(req.body);
     User.findOne({email: req.body.email}, (err,user) => {
         if(err){
-            console.log(err);
             return res.status(400).json({'msg': err.message});
         }
         if(user){
+            console.log('User already exisits');
             return res.status(400).json({'msg': 'The user already exists'});
         }
         const newUser = User(req.body);
@@ -22,13 +21,16 @@ exports.registerUser = (req,res) => {
             if(err){
                 return res.status(400).json({'msg': err.message});
             }
-            return res.status(201).json(user);
+            return res.status(201).json({user:newUser});
         });
     });
 };
-
+exports.getUserInfoPerId = (req,res) => {
+    User.findById(req.body.id)
+    .select({_id: 1,firstName: 1,lastName:1,email:1})
+        .then(user => res.status(200).json(user));
+}
 exports.loginUser = (req, res) => {
-    console.log(req);
     if (!req.body.email || !req.body.password) {
         return res.status(400).send({ 'msg': 'You need to send email and password' });
     }
@@ -39,6 +41,7 @@ exports.loginUser = (req, res) => {
         }
  
         if (!user) {
+            console.log('User does not exist');
             return res.status(400).json({ 'msg': 'The user does not exist' });
         }
  

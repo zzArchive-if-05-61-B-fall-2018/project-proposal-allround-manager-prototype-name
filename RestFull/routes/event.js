@@ -10,6 +10,8 @@ routes.post('/confirm',eventController.userJoin);
 
 routes.post('/joins',eventController.getJoinedUser);
 
+routes.post('/eventById',eventController.getEvent)
+
 routes.post('/notificate',eventController.notificate);
 
 routes.post('/getNotifications',eventController.getNotifactions);

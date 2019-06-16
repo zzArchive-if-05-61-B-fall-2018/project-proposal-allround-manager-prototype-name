@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import { EventHandlerService} from '../../services/event-handler.service';
-import { Event} from '../../interfaces/event';
 import {Router} from '@angular/router';
-import {EventsPageModule} from './events.module';
 import {UpdateEventsService} from '../../services/update-events.service';
 
 @Component({
@@ -18,14 +16,14 @@ export class EventsPage implements OnInit {
   constructor(private handler: EventHandlerService, private router: Router, private updateService: UpdateEventsService) {
     this.subscription = updateService.createAnnounced$.subscribe(
         res => {
-          this.results = res['events'];
+          this.results = res as Object[];
         }
     );
   }
 
   ngOnInit(): void {
-    this.handler.getEvents().subscribe(res => {
-      this.results = res['events'];
+    this.handler.getEvents().subscribe( res => {
+      this.results = res as Object[];
     });
   }
 

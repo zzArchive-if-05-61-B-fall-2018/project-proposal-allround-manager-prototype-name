@@ -1,6 +1,6 @@
 ion-content{
     --padding-top: 25%;
-    --background: rgb(69, 69, 69);
+    --background: url("../../../theme/img/background_login.jpg");
     .login-title{
         padding-bottom: 50px;
         h3{
@@ -10,7 +10,7 @@ ion-content{
         }
     }
     ion-card{
-        --background: rgba(254, 254, 254,1);     
+        --background: rgba(254, 254, 254,0.9);
         border-radius: 14px;
     }
     ion-button{
