@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { NotificationsPage } from './notifications.page';
 import {path} from '@angular-devkit/core';
+import {InviteButtonComponent} from './invite-button/invite-button.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import {path} from '@angular-devkit/core';
     IonicModule,
     RouterModule.forChild([{path: '', component: NotificationsPage}])
   ],
-  declarations: [NotificationsPage]
+  declarations: [NotificationsPage, InviteButtonComponent],
+  entryComponents: [InviteButtonComponent]
 })
 export class NotificationsPageModule {}

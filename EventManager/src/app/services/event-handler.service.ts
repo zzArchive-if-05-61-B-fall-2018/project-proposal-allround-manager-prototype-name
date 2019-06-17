@@ -37,4 +37,12 @@ export class EventHandlerService {
     getInvitation() {
       return this.http.post(`${environment.url}/api/event/getNotifications`,{userId: this.apiService.user.id});
   }
+
+    joinEvent(eventID: any, id: number | string) {
+        return this.http.post(`${environment.url}/api/event/joins`,{userID: id, eventID: eventID});
+    }
+
+    removeInvitation(eventID: any) {
+        
+    }
 }

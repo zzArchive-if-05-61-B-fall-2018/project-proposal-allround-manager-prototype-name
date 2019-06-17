@@ -10,7 +10,7 @@ import {NotificationService} from '../../services/notification.service';
 })
 export class NotificationsPage implements OnInit {
 
-  notifications: [string] = [];
+  notifications: [string] = [''];
   constructor(private eventHandler: EventHandlerService, private notificationService: NotificationService) {
 
   }
@@ -37,8 +37,13 @@ export class NotificationsPage implements OnInit {
       this.notifications = res['notifications'];
     });
   }
-
-  display () {
-    console.log('Hi');
+  reload() {
+      console.log('Close');
+      this.getOpenedNotifications()
+          .then(
+              res => {
+                  this.notificationService.increase(this.notifications.length);
+              }
+          );
   }
 }

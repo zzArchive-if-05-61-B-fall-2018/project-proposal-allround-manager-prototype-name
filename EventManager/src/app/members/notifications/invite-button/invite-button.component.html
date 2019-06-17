@@ -1,0 +1,9 @@
+
+  <ion-button *ngIf="!selected" (click)="selected = !selected"  fill="outline" size="large" expand="block" color="medium">
+    {{event?.event_name}}
+  </ion-button>
+  <ion-buttons>
+    <ion-button (click)="acceptEvent()" *ngIf="selected" style="width: 45%; height: 50px;" size="large" expand="" fill="outline" color="success">Accept</ion-button>
+    <ion-button (click)="refuseEvent()" *ngIf="selected" style="width: 45%; height: 50px;" size="large" expand="" fill="outline" color="danger">Refuse</ion-button>
+    <ion-button *ngIf="selected" (click)="selected = !selected" style="width: 10%; height: 50px;" size="large" expand="" fill="outline" color="medium"><ion-icon name="arrow-round-back"></ion-icon></ion-button>
+  </ion-buttons>

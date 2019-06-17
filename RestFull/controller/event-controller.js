@@ -35,21 +35,14 @@ exports.createEventById = (req,res) =>{
 }
 
 exports.userJoin = (req,res) =>{
-     User.findById(req.body.userId, (err,user) => {
-        if(err){
-            return res.status(400).json({'msg':'User does not exist'})
-        }
-        Event.findById(req.body.eventId,(err,event)=>{
-            if(err){
-                return res.status(400).json({'msg':'Event does not exist!'});
-            }
-            const newJoin = UserjoinEvent(req.body);
-            newJoin.save((err,join) =>{
-                if(err) res.status(400).json({'msg':err.message});
-                return res.status(200).json();
-            });
-        });
-     });
+     Event.findByIdAndUpdate(req.body.eventId,{
+         $addToSet: {
+            event_participants: req.body.userId  
+         }
+     },{new: true})
+     .then(
+         event=> res.status(200).json(event)
+     );
 }
 
 exports.getJoinedUser = (req,res) =>{

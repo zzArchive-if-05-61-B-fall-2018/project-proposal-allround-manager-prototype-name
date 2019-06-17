@@ -6,8 +6,6 @@
 
 <ion-content>
   <ion-list>
-      <ion-button (mouseover)="display()" fill="outline" size="large" expand="block" color="medium" *ngFor="let noti of notifications">
-        {{noti}}
-      </ion-button>
+      <invite-button *ngFor="let noti of notifications" [eventID]="noti" (close)="reload()"></invite-button>
   </ion-list>
 </ion-content>
