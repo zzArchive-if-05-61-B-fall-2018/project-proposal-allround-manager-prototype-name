@@ -20,12 +20,13 @@ exports.createEventById = (req,res) =>{
     /*createEvent(req.body)
         .then(us => res.status(200).send(us))
         .catch(err => res.status(400).send(err.message));*/
-        console.log(req.body);
-    const newEvent = Event(req.body); 
+    const newEvent = new Event(req.body); 
+    console.log();
     newEvent.save((err,user) => {
         if(err){
             return res.status(400).json({'msg': err.message});
         }
+        console.log(user);
         const us = getEventsById(newEvent.adminId)
         .then(events => {
             return res.status(200).json(events);
@@ -69,12 +70,14 @@ exports.notificate = (req,res) =>{
     createNotification(req.body)
     .then(notificates => {
         res.status(200).json(notificates);
-    })
+    }).catch(err => console.log(err));
 }
 
 exports.getNotifactions = (req,res) => {
+    console.log(req.body);
     getNotifactionsFromUser(req.body.userId)
         .then(notifications => {
+            console.log(notifications);
             res.status(200).json(notifications);
         })
 }
@@ -82,7 +85,7 @@ exports.getNotifactions = (req,res) => {
 async function getNotifactionsFromUser(id){
     const notifications = await User
         .findById(id)
-        .select({notifications:1,_id: 0});
+        .select({notifications:1, _id: 0});
     return notifications;
 }
 async function getJoinedUser(event_id){
@@ -92,12 +95,11 @@ async function getJoinedUser(event_id){
     return us;
 }
 async function createNotification(body){
-    const notificates = await User.findByIdAndUpdate(body.userId,{
+    const notificates = await User.findOneAndUpdate({email: body.email},{
         $addToSet: {
-            notifications: {eventId: body.eventId}
+            notifications: body.eventId
         }
-    },{new: true})
-    .select({notifications: 1, _id: 0});
+    },{new: true});
     return notificates;
 }
 async function getEvent(id){

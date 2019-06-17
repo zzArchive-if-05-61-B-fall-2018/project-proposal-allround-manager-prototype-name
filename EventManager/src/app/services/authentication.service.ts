@@ -32,7 +32,7 @@ export class AuthenticationService {
     return this.httpClient.post( `${this.AUTH_SERVER_ADDRESS}/api/auth/login`, user).pipe(
         tap( res => {
                this.storage.set(TOKEN_KEY, res['token']);
-               this.user = res;
+               this.user = {id: res['user']._id, email: res['user'].email};
                this.tok = this.helper.decodeToken(res['token']);
                this.authenticationState.next(true);
         },

@@ -9,15 +9,36 @@
 
 <ion-content>
   <ion-list>
-    <ion-button fill="outline" size="large" expand="full" color="medium">
-      Info
+    <ion-button (click)="showInfo = !showInfo" fill="outline" size="large" expand="full" color="medium">Info
     </ion-button>
+    <div *ngIf="showInfo">
+      <ion-list>
+        <ion-item>
+          {{event_date.toDateString()}}
+        </ion-item>
+        <ion-item>
+          {{event.event_dis}}
+        </ion-item>
+      </ion-list>
+    </div>
     <ion-button (click)="presentParticipentModal()" fill="outline" size="large" expand="full" color="medium">
         Participents
       </ion-button>
-    <ion-button fill="outline" size="large" expand="full" color="medium">
+    <ion-button (click)="showInv = !showInv" fill="outline" size="large" expand="full" color="medium">
       Invitation
     </ion-button>
+    <div *ngIf="showInv">
+      <form #form="ngForm" (ngSubmit)="inviteUser(form)">
+        <ion-list>
+          <ion-item>
+            <ion-input name="user_email" placeholder="Email" ngModel required></ion-input>
+          </ion-item>
+          <ion-button color="medium" size="large" type="submit" [disabled]="form.invalid" expand="block">
+            Invite
+          </ion-button>
+        </ion-list>
+      </form>
+    </div>
     <ion-button fill="outline" size="large" expand="full" color="medium">
       Event settings
     </ion-button>

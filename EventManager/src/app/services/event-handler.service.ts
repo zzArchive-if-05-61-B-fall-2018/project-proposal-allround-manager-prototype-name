@@ -14,11 +14,12 @@ export class EventHandlerService {
   constructor(private http: HttpClient, private apiService: AuthenticationService) { }
 
   createEvent(event) {
+      console.log(event.description);
     return this.http.post(`${environment.url}/api/event/create`,
         {
                 event_name: event.event_name,
                 date: event.date,
-                event_dis: event.discription,
+                event_dis: event.description,
                 adminId: this.apiService.user.id,
         });
   }
@@ -27,5 +28,13 @@ export class EventHandlerService {
   }
   getEvents() {
     return this.http.post(`${environment.url}/api/event`, {id: this.apiService.user.id});
+  }
+
+  inviteUser(email, eventId) {
+      return this.http.post(`${environment.url}/api/event/notificate`, {email: email, eventId: eventId});
+  }
+
+    getInvitation() {
+      return this.http.post(`${environment.url}/api/event/getNotifications`,{userId: this.apiService.user.id});
   }
 }

@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
     birthday: String,
     email: {type: String,required: true},
     password: {type: String, required: true},
-    notifications: {type:[{eventId:String}]}
+    notifications: [String]
 });
 
 UserSchema.pre('save',  function(next) {

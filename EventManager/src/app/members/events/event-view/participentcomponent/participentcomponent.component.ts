@@ -17,6 +17,7 @@ export class ParticipentcomponentComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('ssss');
     console.log(this.participants);
     this.getUsers().then(
         users => this.users = users

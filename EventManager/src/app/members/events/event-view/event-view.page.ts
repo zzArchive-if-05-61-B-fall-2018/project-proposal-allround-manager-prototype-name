@@ -12,17 +12,30 @@ import {Event} from '../../../interfaces/event';
 })
 export class EventViewPage implements OnInit {
   event: Event;
+  showInfo = false;
+  showInv: false;
+  event_date: Date;
   constructor(private modalController: ModalController, private activeRoute: ActivatedRoute, private eventHandler: EventHandlerService) {
     this.activeRoute.paramMap.subscribe( paramMap => {
       const eventId = paramMap.get('eventId');
       this.eventHandler.getEvent(eventId).subscribe(res => {
         this.event = res as Event;
         console.log(this.event);
+        this.event_date = new Date(this.event.date);
       });
     });
   }
 
   ngOnInit() {
+  }
+
+  inviteUser(user) {
+    this.eventHandler.inviteUser(user.value.user_email, this.event._id).subscribe(
+        res => {
+          console.log(res);
+          this.showInv = false;
+        }
+    );
   }
 
   async presentParticipentModal() {

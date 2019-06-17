@@ -4,6 +4,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+      <ion-button (mouseover)="display()" fill="outline" size="large" expand="block" color="medium" *ngFor="let noti of notifications">
+        {{noti}}
+      </ion-button>
+  </ion-list>
 </ion-content>

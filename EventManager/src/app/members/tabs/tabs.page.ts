@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
+import {NotificationService} from '../../services/notification.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-tabs',
@@ -8,12 +10,18 @@ import {AuthenticationService} from '../../services/authentication.service';
 })
 export class TabsPage implements OnInit {
 
-
-  constructor(private authService: AuthenticationService) {
+  notification_count: Number;
+  subscription: Subscription;
+  constructor(private authService: AuthenticationService, private notificationService: NotificationService) {
+    this.subscription = notificationService.increaseAnnounced$.subscribe(
+        res => {
+          this.notification_count = res as Number;
+        }
+    );
   }
 
 
   ngOnInit() {
-    console.log(this.authService.getSpecialData());
   }
+
 }
