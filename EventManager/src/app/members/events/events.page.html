@@ -7,7 +7,7 @@
 <ion-content padding>
 
   <div>
-    <ion-card *ngFor="let event of results" [routerLink]="['/members/tabs/tabs/events',event._id]">
+    <ion-card *ngFor="let event of events" [routerLink]="['/members/tabs/tabs/events',event._id]">
       <ion-grid style="padding: 0px;">
         <ion-row style="height: 45px;">
           <ion-col size="2" style="border-right: 2px solid #727272;">

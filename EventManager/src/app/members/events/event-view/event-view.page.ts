@@ -32,7 +32,6 @@ export class EventViewPage implements OnInit {
   inviteUser(user) {
     this.eventHandler.inviteUser(user.value.user_email, this.event._id).subscribe(
         res => {
-          console.log(res);
           this.showInv = false;
         }
     );

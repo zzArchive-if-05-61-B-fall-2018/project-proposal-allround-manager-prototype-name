@@ -15,4 +15,6 @@ routes.post('/eventById',eventController.getEvent)
 routes.post('/notificate',eventController.notificate);
 
 routes.post('/getNotifications',eventController.getNotifactions);
+
+routes.post('/removeNotification',eventController.removeNotification)
 module.exports = routes;

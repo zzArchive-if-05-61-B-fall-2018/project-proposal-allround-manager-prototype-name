@@ -32,6 +32,7 @@ export class NotificationsPage implements OnInit {
             }
         );
   }
+
   async getOpenedNotifications () {
     await this.eventHandler.getInvitation().subscribe(res => {
       this.notifications = res['notifications'];

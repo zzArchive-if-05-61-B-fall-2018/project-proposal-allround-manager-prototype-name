@@ -23,13 +23,20 @@ export class InviteButtonComponent implements OnInit {
   }
 
   acceptEvent() {
-    this.eventService.joinEvent(this.eventID, this.authService.user.id);
-    this.onClose();
+    this.eventService.joinEvent(this.eventID, this.authService.user.id).subscribe(
+        res => {
+          console.log(res);
+          this.selected = false;
+          this.onClose();
+        }
+    );
   }
 
   refuseEvent() {
-     this.eventService.removeInvitation(this.eventID);
-     this.onClose();
+    this.eventService.removeInvitation(this.eventID, this.authService.user.id).subscribe(res => {
+      this.selected = false;
+      this.onClose();
+    });
   }
 
   onClose() {

@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import { Event} from '../interfaces/event';
 import {environment} from '../../environments/environment';
 import {AuthenticationService} from './authentication.service';
+import {Userjoin} from '../interfaces/userjoin';
+import {User} from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,6 @@ export class EventHandlerService {
   constructor(private http: HttpClient, private apiService: AuthenticationService) { }
 
   createEvent(event) {
-      console.log(event.description);
     return this.http.post(`${environment.url}/api/event/create`,
         {
                 event_name: event.event_name,
@@ -27,7 +28,7 @@ export class EventHandlerService {
     return this.http.post(`${environment.url}/api/event/eventById`, { id: id});
   }
   getEvents() {
-    return this.http.post(`${environment.url}/api/event`, {id: this.apiService.user.id});
+    return this.http.post<Userjoin[]>(`${environment.url}/api/event`, {id: this.apiService.user.id});
   }
 
   inviteUser(email, eventId) {
@@ -38,11 +39,15 @@ export class EventHandlerService {
       return this.http.post(`${environment.url}/api/event/getNotifications`,{userId: this.apiService.user.id});
   }
 
-    joinEvent(eventID: any, id: number | string) {
-        return this.http.post(`${environment.url}/api/event/joins`,{userID: id, eventID: eventID});
-    }
+  joinEvent(eventId: any, id: number | string) {
+      this.http.post(`${environment.url}/api/event/removeNotification`, {userId: id, eventId: eventId}).subscribe(res =>{
+          console.log('Remove Notification');
+      });
+      return this.http.post(`${environment.url}/api/event/confirm`, {userId: id, eventId: eventId});
 
-    removeInvitation(eventID: any) {
-        
+  }
+
+    removeInvitation(eventId: any, id: number | string) {
+        return this.http.post(`${environment.url}/api/event/removeNotification`, {userId: id, eventId: eventId});
     }
 }
