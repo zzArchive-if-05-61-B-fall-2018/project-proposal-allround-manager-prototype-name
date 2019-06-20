@@ -30,14 +30,20 @@ export class EventsPage implements OnInit {
   ngOnInit(): void {
     this.handler.getEvents().subscribe( res => {
       this.results = res;
-      console.log(res);
         this.getEvents().then(result => {
-          console.log(result);
           this.events = result;
         });
       });
   }
 
+  ionViewWillEnter() {
+    this.handler.getEvents().subscribe( res => {
+      this.results = res;
+      this.getEvents().then(result => {
+        this.events = result;
+      });
+    });
+  }
   async getEvents () {
     const pArray = this.results.map( async join => {
       const event = await this.handler.getEvent(join.eventId).toPromise();

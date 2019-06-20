@@ -44,15 +44,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'groups',
-        children: [
-          {
-            path: '',
-            loadChildren: '../groups/groups.module#GroupsPageModule'
-          }
-        ]
-      },
-      {
         path: 'settings',
         children: [
           {

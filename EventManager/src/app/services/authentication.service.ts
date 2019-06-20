@@ -38,9 +38,6 @@ export class AuthenticationService {
         },
         error => error)
     );
-    /*return this.storage.set(TOKEN_KEY, 'Bearer 123456').then(res => {
-      this.authenticationState.next(true);
-    });*/
   }
 
   register(user) {
@@ -51,17 +48,17 @@ export class AuthenticationService {
         })
     );
   }
+
   async logout() {
       this.storage.remove(TOKEN_KEY).then(() => {
           this.authenticationState.next(false);
       });
   }
-  getSpecialData() {
-        return this.user;
-  }
+
   isAuthenticated() {
     return this.authenticationState.value;
   }
+
   checkToken() {
     return this.storage.get(TOKEN_KEY).then(res => {
       if (res) {

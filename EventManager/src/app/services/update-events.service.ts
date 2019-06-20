@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {EventHandlerService} from './event-handler.service';
 import {Subject} from 'rxjs';
 
 @Injectable({
@@ -10,7 +9,7 @@ export class UpdateEventsService {
   private createAnnouncedSource = new Subject();
 
   createAnnounced$ = this.createAnnouncedSource.asObservable();
-  constructor(private handler: EventHandlerService) { }
+  constructor() { }
 
   create(res) {
     this.createAnnouncedSource.next(res);

@@ -19,7 +19,7 @@ export function jwtOptionsFactory(storage) {
       return storage.get('access_token');
     },
     whitelistedDomains: ['localhost:8888']
-  }
+  };
 }
 
 @NgModule({

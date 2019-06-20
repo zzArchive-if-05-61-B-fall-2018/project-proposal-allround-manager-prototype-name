@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../../../interfaces/user';
-import {AuthenticationService} from '../../../../services/authentication.service';
 import {ModalController} from '@ionic/angular';
 
 @Component({
@@ -12,16 +10,10 @@ export class ParticipentcomponentComponent implements OnInit {
 
   @Input() participants: Object[];
 
-  public users: User[];
-  constructor(private modalController: ModalController, private userService: AuthenticationService) {
+  constructor(private modalController: ModalController) {
   }
-
   ngOnInit() {
   }
-
-  displayUser() {
- }
-
   async myDismiss() {
     await this.modalController.dismiss();
   }

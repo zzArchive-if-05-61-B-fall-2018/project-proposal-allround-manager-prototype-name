@@ -39,7 +39,6 @@ export class NotificationsPage implements OnInit {
     });
   }
   reload() {
-      console.log('Close');
       this.getOpenedNotifications()
           .then(
               res => {

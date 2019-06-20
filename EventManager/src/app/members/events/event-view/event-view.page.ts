@@ -52,8 +52,7 @@ export class EventViewPage implements OnInit {
           }
       );
   }
-  async presentParticipentModal() {
-      console.log(this.participants)
+  async presentParticipantModal() {
     const modal = await this.modalController.create({
       component: ParticipentcomponentComponent,
         componentProps: {participants: this.participants}
