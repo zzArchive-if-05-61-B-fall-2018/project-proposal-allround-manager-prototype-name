@@ -4,6 +4,7 @@ import {EventHandlerService} from '../../../services/event-handler.service';
 import {ModalController} from '@ionic/angular';
 import {ParticipentcomponentComponent} from './participentcomponent/participentcomponent.component';
 import {Event} from '../../../interfaces/event';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-event-view',
@@ -15,13 +16,15 @@ export class EventViewPage implements OnInit {
   showInfo = false;
   showInv: false;
   event_date: Date;
-  constructor(private modalController: ModalController, private activeRoute: ActivatedRoute, private eventHandler: EventHandlerService) {
+  participants: Object[] = [];
+
+  constructor(private userService: AuthenticationService, private modalController: ModalController, private activeRoute: ActivatedRoute, private eventHandler: EventHandlerService) {
     this.activeRoute.paramMap.subscribe( paramMap => {
       const eventId = paramMap.get('eventId');
       this.eventHandler.getEvent(eventId).subscribe(res => {
         this.event = res as Event;
-        console.log(this.event);
         this.event_date = new Date(this.event.date);
+        this.getParticipants();
       });
     });
   }
@@ -36,11 +39,24 @@ export class EventViewPage implements OnInit {
         }
     );
   }
-
+  getParticipants() {
+      this.eventHandler.getParticipants(this.event._id).subscribe(
+           async res => {
+              this.participants = res as Object[];
+              const pArray = this.participants.map(async user => {
+                  const u = await this.userService.getUserPerId(user['userId']).toPromise();
+                  return u;
+              });
+              const users = await Promise.all(pArray);
+              this.participants = users as Object[];
+          }
+      );
+  }
   async presentParticipentModal() {
+      console.log(this.participants)
     const modal = await this.modalController.create({
       component: ParticipentcomponentComponent,
-      componentProps: {participants: this.event.event_participants}
+        componentProps: {participants: this.participants}
     });
     return await modal.present();
   }

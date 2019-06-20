@@ -47,7 +47,11 @@ export class EventHandlerService {
 
   }
 
-    removeInvitation(eventId: any, id: number | string) {
-        return this.http.post(`${environment.url}/api/event/removeNotification`, {userId: id, eventId: eventId});
+  removeInvitation(eventId: any, id: number | string) {
+      return this.http.post(`${environment.url}/api/event/removeNotification`, {userId: id, eventId: eventId});
+  }
+
+    getParticipants(evendId: any) {
+      return this.http.post(`${environment.url}/api/event/getParticipants`, {eventId: evendId});
     }
 }

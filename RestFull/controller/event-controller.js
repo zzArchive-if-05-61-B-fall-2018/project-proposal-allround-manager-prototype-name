@@ -72,6 +72,9 @@ exports.getNotifactions = (req,res) => {
             console.log(notifications);
             res.status(200).json(notifications);
         })
+        .catch(err => {
+            console.log('Error');
+        });
 }
 
 exports.removeNotification = (req,res) => {
@@ -81,6 +84,12 @@ exports.removeNotification = (req,res) => {
        } 
     },{new: true}).then(result => res.status(200).json(result));
 }
+
+exports.getParticipants = (req,res) => {
+    UserjoinEvent.find({eventId: req.body.eventId})
+        .select({userId: 1,_id: 0})
+        .then(users => res.status(200).json(users));
+};
 async function getNotifactionsFromUser(id){
     const notifications = await User
         .findById(id)

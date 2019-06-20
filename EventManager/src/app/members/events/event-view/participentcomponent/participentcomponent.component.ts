@@ -10,32 +10,17 @@ import {ModalController} from '@ionic/angular';
 })
 export class ParticipentcomponentComponent implements OnInit {
 
-  @Input() participants: string[];
+  @Input() participants: Object[];
 
   public users: User[];
   constructor(private modalController: ModalController, private userService: AuthenticationService) {
   }
 
   ngOnInit() {
-    console.log('ssss');
-    console.log(this.participants);
-    this.getUsers().then(
-        users => this.users = users
-    );
-  }
-
-  async getUsers() {
-    const pArray = this.participants.map(async userId => {
-      const res = await this.userService.getUserPerId(userId).toPromise();
-      return res;
-    });
-    const users = await Promise.all(pArray);
-    return users as User[];
   }
 
   displayUser() {
-    console.log(this.users);
-  }
+ }
 
   async myDismiss() {
     await this.modalController.dismiss();
